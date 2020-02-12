@@ -22,9 +22,9 @@ namespace ECMasterDataAPI.Controllers
         }
         // GET: api/PollingDistrict
         [HttpGet]
-        public async Task<List<SpAdminDistricts>> Get()
+        public async Task<List<PollingDistrict>> Get()
         {
-            return await _context.GetAdminDistrictsAsync();
+            return await _context.PollingDistricts.ToListAsync();
         }
 
         // GET: api/PollingDistrict/5
@@ -32,7 +32,7 @@ namespace ECMasterDataAPI.Controllers
         public async Task<IActionResult> Get(int id)
         {
             PollingDistrict district = await _context.PollingDistricts.FirstOrDefaultAsync(dis => dis.Pdid == id);
-            if(district == null)
+            if (district == null)
             {
                 return NotFound();
             }
