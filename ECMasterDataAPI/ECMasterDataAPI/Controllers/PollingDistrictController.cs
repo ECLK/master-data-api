@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ECMasterDataAPI.Models;
+using ECMasterDataAPI.Models.StoredProceduers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,9 +22,9 @@ namespace ECMasterDataAPI.Controllers
         }
         // GET: api/PollingDistrict
         [HttpGet]
-        public async Task<List<PollingDistrict>> Get()
+        public async Task<List<SpAdminDistricts>> Get()
         {
-            return await _context.PollingDistricts.ToListAsync();
+            return await _context.GetAdminDistrictsAsync();
         }
 
         // GET: api/PollingDistrict/5
