@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/pollingdistrict",
+      "launchUrl": "api/admindistrict",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Threading.Tasks;
+using ECMasterDataAPI.Models.StoredProceduers;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -924,6 +929,49 @@ namespace ECMasterDataAPI.Models
 
                 entity.Property(e => e.VerifyBy).HasDefaultValueSql("((0))");
             });
+
+            modelBuilder.Query<SpAdminDistricts>();
+        }
+
+        public async Task<List<SpAdminDistricts>> GetAdminDistrictsAsync()
+        {
+            List<SpAdminDistricts> lst = new List<SpAdminDistricts>();
+
+            string sqlQuery = "EXEC [dbo].[spADis]";
+
+            try
+            {
+                lst = await this.Query<SpAdminDistricts>().FromSql(sqlQuery).ToListAsync();
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+
+            // Info.  
+            return lst;
+        }
+
+        public async Task<List<SpAdminDistricts>> GetAdminDistrictByIdAsync(int id)
+        {
+            List<SpAdminDistricts> lst = new List<SpAdminDistricts>();
+
+            SqlParameter param =  new SqlParameter("@id", id);
+
+            // Processing.  
+            string sqlQuery = "EXEC [dbo].[spADisById] " + "@id";
+
+            try
+            {
+                lst = await this.Query<SpAdminDistricts>().FromSql(sqlQuery, param).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            // Info.  
+            return lst;
         }
     }
 }
